@@ -6,9 +6,9 @@ const int leftRed = 18;
 const int leftGreen = 19;
 const int leftBlue = 21;
 
-const int rightRed = 35;
+const int rightRed = 26;
 const int rightGreen = 33;
-const int rightBlue = 34;
+const int rightBlue = 25;
 
 const int leftButton = 22;
 const int rightButton = 23;

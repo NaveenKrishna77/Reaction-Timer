@@ -95,4 +95,9 @@ Next Session
 
 Learned
 - Figured out millis() properly, in order to start counting when an event happens, I used a first-run initialization guard that acts like a gatekeeper. it ensures the snapshot of the master stopwatch (millis) only happens at the exact millisecond the states changes
+
+Next Session
+- Learn more about PlatformIO
+- Debug why it's not visibly flashing, 
 - Static, scope in C++, Design patterns
+- Continue with reaction timer programming, use states and functions
