@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <elapsedMillis.h>
 
 //pin definitions
 
@@ -15,7 +16,10 @@ const int rightButton = 23;
 
 
 //global tracking variables for timing
+elapsedMillis timeAtStateChange;
+unsigned long randDelay = 0;
 unsigned long previousTimeFlashBlue = 0;         //needed to pass as reference,     just an argument to help flashBlue run with millis() for scalability
+
 
 void turnOffAllLEDs();
 void flashBlue(unsigned long &);
@@ -54,18 +58,31 @@ void loop() {
   if (currentState == IDLE) {
     turnOffAllLEDs();
     if (digitalRead(leftButton) == LOW || digitalRead(rightButton) == LOW) {
-      currentState = START_ANIMATION;
+        Serial.println("button pressed");
+        currentState = START_ANIMATION;
     }
   }
+
   else if (currentState == START_ANIMATION) {
     flashBlue(previousTimeFlashBlue);
   }
+
   else if (currentState == RANDOM_DELAY) {
+    if (randDelay = 0) {
+        randDelay = random(2000, 4000);
+        timeAtStateChange = 0;
+    }
 
+    if (timeAtStateChange >= randDelay) {   //Not running properly? (changes state without delay so logic issue (or hardware))
+        randDelay = 0;
+        currentState = WAIT_FOR_PRESS;
+    }
   }
+
   else if (currentState == WAIT_FOR_PRESS) {
-
+    digitalWrite(leftGreen, HIGH);
   }
+
 }
 
 void turnOffAllLEDs() {
@@ -77,11 +94,12 @@ void turnOffAllLEDs() {
   digitalWrite(rightBlue, LOW);
 }
 
-void flashBlue(unsigned long &previousTime) {      //global var passed by reference to make previousTime global (not reset every loop run)
+void flashBlue(unsigned long &previousTime) {     //global var passed by reference to make previousTime global (not reset every loop run)
   const unsigned long total_duration = 1500;    //1500 ms
   const unsigned long blink_interval = 150;     //150 ms
   unsigned long currentTime = millis();
   static unsigned long flashStartTime = 0;  //static variable to capture the time the button is pressed (moves the carrot)
+  static bool blueOn = false;  //explicit state flag; digitalRead() on an OUTPUT pin isn't a reliable way to infer state on ESP32
   
   /*
   check if it's the first loop run (flash animation just starting) and make the flashStartTime and previousTime catch up with millis(),
@@ -93,25 +111,27 @@ void flashBlue(unsigned long &previousTime) {      //global var passed by refere
     previousTime = currentTime;
   }
 
-  if (currentTime - flashStartTime >= total_duration) {
+  if (currentTime - flashStartTime >= total_duration) {    // if timer interval exceeds total duration
     turnOffAllLEDs();
     currentState = RANDOM_DELAY;
     flashStartTime = 0;        //reset so static variable works in the next loop
     previousTime = 0;
+    blueOn = false;
     return;
   }
   
 
-  else if (currentTime - previousTime >= blink_interval) {
-    //turn blue if off, turn off if blue
-    if (digitalRead(leftBlue) == LOW && digitalRead(rightBlue) == LOW) {
+  else if (currentTime - previousTime >= blink_interval) {     // if timer interval exceeds blink time (blink again)
+    //turn blue on if off, turn off if on
+    blueOn = !blueOn;
+    if (blueOn) {
       digitalWrite(leftBlue, HIGH);
       digitalWrite(rightBlue, HIGH);
     }
     else {
       turnOffAllLEDs();
     }
-    
+
     previousTime = currentTime;
   }
 }

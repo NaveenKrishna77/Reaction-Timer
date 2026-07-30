@@ -101,3 +101,16 @@ Next Session
 - Debug why it's not visibly flashing, 
 - Static, scope in C++, Design patterns
 - Continue with reaction timer programming, use states and functions
+- Learn multimeter
+
+## July 30th
+
+Learned
+- Reason it wasn't visibly flashing -> I didn't push my ESP32 all the way into the breadboard LOL. Always something like that. Worked perfectly as soon as I did it.
+- So very important lesson learned, before sweating over software bugs, debug the hardware, use the serial monitor and see what might not work physically!
+- Use ellapsedMillis instead of millis(), it's external library but way easier, less math (can reset it if needed)
+
+Next Session
+- Maybe redo flashBlue with ellapsedMillis instead
+- Rubber Duck Debug why the 2-4 second delay isn't working (the code in WAIT_FOR_PRESS runs right away-no delay)
+- Go onto WAIT_FOR_PRESS after completing above
