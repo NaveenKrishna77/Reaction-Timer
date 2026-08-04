@@ -1,6 +1,7 @@
 ## Reaction Timer
 
-![Reaction Timer Circuit](C:\Users\navee\Downloads\20260804_161847.jpg "Circuit picture")
+
+<img width="1359" height="1812" alt="20260804_161847" src="https://github.com/user-attachments/assets/ee5ddcf3-7cad-4307-b8ad-68110583ad68" />
 
 
 
