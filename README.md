@@ -1,7 +1,10 @@
 ## Reaction Timer
 
+Circuit: 
+<img width="959" height="1412" alt="20260804_161847" src="https://github.com/user-attachments/assets/ee5ddcf3-7cad-4307-b8ad-68110583ad68" />
 
-<img width="1359" height="1812" alt="20260804_161847" src="https://github.com/user-attachments/assets/ee5ddcf3-7cad-4307-b8ad-68110583ad68" />
+Flowchart:
+<img width="625" height="958" alt="Reaction timer v1" src="https://github.com/user-attachments/assets/56ce7096-abba-4754-a585-eaebb6061bae" />
 
 
 
