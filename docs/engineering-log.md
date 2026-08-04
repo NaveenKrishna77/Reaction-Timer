@@ -111,6 +111,15 @@ Learned
 - Use ellapsedMillis instead of millis(), it's external library but way easier, less math (can reset it if needed)
 
 Next Session
+- Learn design patterns, learn ellapsedMillis with Github repo
 - Maybe redo flashBlue with ellapsedMillis instead
 - Rubber Duck Debug why the 2-4 second delay isn't working (the code in WAIT_FOR_PRESS runs right away-no delay)
 - Go onto WAIT_FOR_PRESS after completing above
+
+## August 4th
+
+Learned
+- Had to add additional conditionals to loop() for flashing on win functionality
+
+Next Session
+- Finished. Otherwise, add a screen to build off of MVP.
